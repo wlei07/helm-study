@@ -5,6 +5,7 @@ helm repo list
 #based on information in index.yaml, it can update accordingly https://repo.broadcom.com/bitnami-files/index.yaml
 helm repo update
 helm repo remove bitnami
+helm repo --help
 
 helm search repo wordpress
 helm search repo wordpress --versions
@@ -14,4 +15,12 @@ helm show chart bitnami/wordpress
 helm show readme bitnami/wordpress
 helm show values bitnami/wordpress
 
-helm repo --help
+helm install --help
+# release-name can be anything that makes sense
+helm install [release-name] [chart-name]
+
+minikube start
+
+kubectl version
+kubectl config current-context
+
