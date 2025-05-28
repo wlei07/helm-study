@@ -17,10 +17,18 @@ helm show values bitnami/wordpress
 
 helm install --help
 # release-name can be anything that makes sense
-helm install [release-name] [chart-name]
+# helm install [release-name] [chart-name]
+helm install local-wp bitnami/wordpress --version=24.2.6
 
 minikube start
+minikube service local-wp-exposed
 
 kubectl version
 kubectl config current-context
-
+kubectl get pod
+kubectl get svc
+kubectl get secret
+kubectl get deploy
+kubectl describe secret local-wp-wordpress
+kubectl describe pod local-wp-wordpress-7b4d8895f-rc9kf
+kubectl expose deploy local-wp-wordpress --type=NodePort --name=local-wp-exposed
