@@ -1,0 +1,11 @@
+# 1. set out own wordpress username
+# 2. set out own wordpress password
+# 3. increase the replica count to 3
+
+wordpressUsername: lei
+existingSecret: custom-wp-credentials
+# replicaCount: 3
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
