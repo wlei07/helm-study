@@ -35,7 +35,9 @@ helm list
 helm uninstall local-wp
 # --reuse-values means reuse exising values if not override in the custom-values.yaml.
 # note if you remove values from custom-values.yaml, it is still used.
-helm upgrade --reuse-values --values ~/dev/helm-study/setting-values/custom-values.yaml local-wp bitnami/wordpress --version 24.2.6
+# --cleanup-on-fail does not clean rs (replica set)
+helm upgrade --reuse-values --values ~/dev/helm-study/setting-values/custom-values.yaml local-wp bitnami/wordpress --version 24.2.6 --atomic --cleanup-on-fail --debug --timeout 2m
+helm rollback local-wp 3
 
 kubectl version
 kubectl config current-context
@@ -47,11 +49,12 @@ kubectl get secret local-wp-wordpress -o jsonpath='{.data.wordpress-password}' |
 kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-password}' | base64 -d
 kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-root-password}' | base64 -d
 kubectl get deploy
+# replica set
+kubectl get rs
 kubectl describe secret local-wp-wordpress
 kubectl describe pod local-wp-wordpress-7b4d8895f-9rs2h
 
 kubectl expose deploy local-wp-wordpress --type=NodePort --name=local-wp-exposed
-kubectl delete svc local-wp-exposed
 #check for persistent volume or persistent volume claim
 kubectl get pv,pvc
 kubectl get secret,pod,deploy,svc
@@ -59,6 +62,8 @@ kubectl get pvc
 kubectl describe pvc data-local-wp-mariadb-0
 kubectl describe storageclass standard # ReclaimPolicy: Delete -> so pv will be deleted when pvc is deleted
 kubectl delete pvc data-local-wp-mariadb-0
+kubectl delete rs local-wp-wordpress-97779fff
+kubectl delete svc local-wp-exposed
 
 kubectl logs local-wp-wordpress-7b4d8895f-fbc57
 
