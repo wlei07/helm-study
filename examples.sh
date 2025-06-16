@@ -39,8 +39,6 @@ helm uninstall local-wp
 helm upgrade --reuse-values --values ~/dev/helm-study/setting-values/custom-values.yaml local-wp bitnami/wordpress --version 24.2.6 --atomic --cleanup-on-fail --debug --timeout 2m
 helm rollback local-wp 3
 
-kubectl version
-kubectl config current-context
 kubectl get pod
 kubectl get pod --watch
 kubectl get svc
@@ -68,6 +66,10 @@ kubectl delete svc local-wp-exposed
 kubectl logs local-wp-wordpress-7b4d8895f-fbc57
 
 kubectl create secret generic custom-wp-credentials --from-literal wordpress-password=leipassword
+
+kubectl version
+kubectl api-versions
+kubectl config current-context
 
 minikube start
 minikube service local-wp-exposed
