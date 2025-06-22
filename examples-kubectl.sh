@@ -15,7 +15,6 @@ kubectl expose deploy local-wp-wordpress --type=NodePort --name=local-wp-exposed
 #check for persistent volume or persistent volume claim
 kubectl get pv,pvc
 kubectl get secret,pod,deploy,svc
-kubectl get pvc
 kubectl describe pvc data-local-wp-mariadb-0
 kubectl describe storageclass standard # ReclaimPolicy: Delete -> so pv will be deleted when pvc is deleted
 kubectl delete pvc data-local-wp-mariadb-0

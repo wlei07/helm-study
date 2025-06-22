@@ -26,7 +26,7 @@ helm history local-wp
 
 helm install --help
 # release-name can be anything that makes sense
-# helm install [release-name] [chart-name]
+# helm install [.Release.Name] [chart-name]
 helm install local-wp bitnami/wordpress --version=24.2.6 --set "mariadb.auth.rootPassword=myawesomepassword" --set "mariadb.auth.password=myawesomepassword"
 # --values or -f, both are the same
 helm install local-wp bitnami/wordpress --version=24.2.6 --values setting-values/custom-values.yaml
@@ -43,3 +43,5 @@ helm template nginx
 helm lint nginx
 # name of the deploy: local-nginx, folder of the chart: nginx
 helm install local-nginx nginx
+helm install local-nginx nginx-0.1.0.tgz
+helm package nginx
