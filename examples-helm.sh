@@ -2,6 +2,8 @@
 helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo list
+# move helm package to the current repository, then run this command to create helm repository, it will create index.yaml
+helm repo index .
 #based on information in index.yaml, it can update accordingly https://repo.broadcom.com/bitnami-files/index.yaml
 helm repo update
 helm repo remove bitnami
