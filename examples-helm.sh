@@ -47,3 +47,7 @@ helm lint nginx
 helm install local-nginx nginx
 helm install local-nginx nginx-0.1.0.tgz
 helm package nginx
+
+#create a chart
+helm create --help
+helm create backend-app
