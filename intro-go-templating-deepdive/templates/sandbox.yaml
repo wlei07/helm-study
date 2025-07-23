@@ -1,31 +1,8 @@
-{{/* file name here is sandbox.yaml, but can be anything, does not really matter. */}}
-# I am a YAML comment, and I will remain in the generated YAML
-{{- /* I am a GO comment, and I will NOT remain. */}}
-{{- /*
-the dot referes to the current context: top level object that comes from helm templating feature, which contains three keys:
-- Values
-- Chart
-- Release
-*/}}
-{{- /* note a lower function is used here, the syntax: <function name> <arg1> <arg2> ... */}}
-lower-function-test: {{ lower .Values.test }}
-{{- /* replace white spaces by dashs*/}}
-replace-function-test: {{ replace " " "-" .Values.test }}
-nested-function-test: {{ lower (replace " " "$$" .Values.test) }}
-{{- /* note: the pipe as the result on the left as the LAST parameter of the function on the right */}}
-pipe-test: {{ lower .Values.test | replace " " "_" }}
-pipe-test-2: {{ replace " " "_" .Values.test | upper }}
-labels:
-  {{- /* The app label comes from the Release */}}
-  app: {{ .Release.Name }}
-  {{- /* The chart label comes from the Chart information */}}
-  chart: {{ .Chart.Name }}
-  {{- if eq .Values.environment "production" }}
-  environment: production
-  build: stable
-  public-ingress: true
-  {{- else }}
-  environment: dev
-  build: alpha
-  public-ingress: false
-  {{- end }}
+{{- /* Note: functional name goes first, then the parameters separated by space. */}}
+list:
+{{ list 1 2 3 | toYaml }}
+{{- /* The nindent function: first add a new line, then add indentation as indicated. */}}
+listWithPipe:
+  values:
+    example: {{ list 1 2 3 | toYaml | nindent 6 }}
+my-dict: {{ dict "primitive" "my string" "complex" (dict "key1" "value1") | toYaml | nindent 2 }}
