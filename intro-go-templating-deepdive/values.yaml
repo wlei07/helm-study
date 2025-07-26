@@ -1,3 +1,4 @@
+customName: ''
 ## @param replicaCount Number of Nginx replicas to deploy
 replicaCount: 3
 environment: dev
@@ -8,12 +9,10 @@ image:
   name: nginx
   tag: "1.27.0"
 
-## NGINX container ports
-##
-## @param containerPorts.http
 containerPorts:
   http: 80
-service:
-  enabled: false
-  type: ClusterIP
-  port: 80
+services:
+  - type: ClusterIP
+    port: 80
+  - type: NodePort
+    port: 30007
