@@ -11,8 +11,15 @@ image:
 
 containerPorts:
   http: 80
-services:
+serviceList:
   - type: ClusterIP
     port: 80
   - type: NodePort
+    port: 30007
+serviceDictionary:
+  svc1:
+    type: ClusterIP
+    port: 80
+  svc2:
+    type: NodePort
     port: 30007

@@ -13,9 +13,15 @@ spec:
       labels: {{ include "templating-deep-dive.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-        - name: nginx
+        - name: nginx-service-list
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
-          {{- if .Values.services | default list | len }}
+          {{- if .Values.serviceList | default list | len }}
+          ports:
+            - containerPort: {{ .Values.containerPorts.http }}
+          {{- end }}
+        - name: nginx-service-dictionary
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          {{- if .Values.serviceDictionary | default dict | len }}
           ports:
             - containerPort: {{ .Values.containerPorts.http }}
           {{- end }}
