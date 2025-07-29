@@ -23,3 +23,13 @@ serviceDictionary:
   svc2:
     type: NodePort
     port: 30007
+# to illustrate the $ always refers to the global scope in a nested range.
+users:
+  - name: Alice
+    roles:
+      - admin
+      - editor
+  - name: Bob
+    roles:
+      - viewer
+globalMessage: "Hello from root"

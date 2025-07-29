@@ -6,3 +6,14 @@ listWithPipe:
   values:
     example: {{ list 1 2 3 | toYaml | nindent 6 }}
 my-dict: {{ dict "primitive" "my string" "complex" (dict "key1" "value1") | toYaml | nindent 2 }}
+
+{{ range $user := .Values.users }}
+# User: {{ $user.name }}
+{{ range $role := $user.roles }}
+{{ printf "%s_%s" $user.name $role }}: |
+  Current role: {{ $role }}
+  From inner . : {{ . }}
+  # the $ in a inner range still refers to the global context
+  From root globalMessage: {{ $.Values.globalMessage }}
+{{ end }}
+{{ end }}
