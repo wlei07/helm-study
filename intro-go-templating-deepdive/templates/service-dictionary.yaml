@@ -1,15 +1,18 @@
+# The value of the $ outside the dictionary: {{ $ }}
+# The value of the . outside the dictionary: {{ . }}
 {{- range $key, $svc := .Values.serviceDictionary | default dict }}
 ---
+# The value of the . inside the dictionary: {{ . }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ include "templating-deep-dive.fullname" $ }}-{{ $key }}
   labels: {{ include "templating-deep-dive.selectorLabels" $ | nindent 4 }}
 spec:
-  type: {{ $svc.type }}
+  type: {{ .type }}
   selector: {{ include "templating-deep-dive.selectorLabels" $ | nindent 4 }}
   ports:
     - protocol: TCP
-      port: {{ $svc.port }}
+      port: {{ .port }}
       targetPort: {{ $.Values.containerPorts.http }}
 {{- end }}
