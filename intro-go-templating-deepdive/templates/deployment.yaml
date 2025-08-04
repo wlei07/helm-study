@@ -21,6 +21,15 @@ spec:
           {{- end }}
         - name: nginx-service-dictionary
           image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          {{- with .Values.securityContext | default dict }}
+          # The value of the . after the with block: {{ . }}
+          # Release name: {{ $.Release.Name }}
+          {{- if and (hasKey . "enabled") .enabled }}
+          securityContext:
+            runAsUser: {{ .runAsUser }}
+            fsGroup: {{ .fsGroup }}
+          {{- end }}
+          {{- end }}
           {{- if .Values.serviceDictionary | default dict | len }}
           ports:
             - containerPort: {{ .Values.containerPorts.http }}
