@@ -25,7 +25,7 @@ serviceDictionary:
   svc2:
     type: NodePort
     port: 30007
-# to illustrate the $ always refers to the global scope in a nested range.
+# to illustrate the '$', always refers to the global scope in a nested range.
 users:
   - name: Alice
     roles:

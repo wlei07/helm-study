@@ -1,6 +1,7 @@
 # The value of the $ outside the dictionary: {{ $ }}
 # The value of the . outside the dictionary: {{ . }}
 {{- range $key, $svc := .Values.serviceDictionary | default dict }}
+{{ include "templating-deep-dive.validators.service" . }}
 ---
 # The value of the . inside the dictionary: {{ . }}
 apiVersion: v1
@@ -13,6 +14,7 @@ spec:
   selector: {{ include "templating-deep-dive.selectorLabels" $ | nindent 4 }}
   ports:
     - protocol: TCP
+      # alternative port with validation: {{- /* include "templating-deep-dive.validators.portRange"  .port */ -}}
       port: {{ .port }}
       targetPort: {{ $.Values.containerPorts.http }}
 {{- end }}
