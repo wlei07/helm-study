@@ -1,3 +1,6 @@
+# command to build and push:
+# docker login -u wlei07
+# docker build --push -t wlei07/config-store:1.0.0 .
 FROM node:22-alpine AS development
 WORKDIR /app
 COPY package*.json .

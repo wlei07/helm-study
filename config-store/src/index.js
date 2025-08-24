@@ -4,12 +4,14 @@ const bodyParser = require('body-parser');
 const db = require('./db');
 const port = process.env.PORT || 3000;
 const app = express();
+const apiRouter = require('./routes')
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use('/api', apiRouter);
 app.get('/', (req, res) => {
     res.send('Hello World!!');
-})
+});
 /*
 db.authenticate()
     .then(() => {

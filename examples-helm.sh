@@ -42,6 +42,7 @@ helm upgrade --reuse-values --values ~/dev/helm-study/setting-values/custom-valu
 helm rollback local-wp 3
 
 helm template nginx
+# name of the folder for the Chart.yaml
 helm lint nginx
 # name of the deploy: local-nginx, folder of the chart: nginx
 helm install local-nginx nginx
