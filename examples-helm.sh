@@ -52,3 +52,10 @@ helm package nginx
 #create a chart
 helm create --help
 helm create backend-app
+
+# download the dependency to the charts folder, then update the Chart.lock file
+# WRITE the Chart.lock
+helm dependency update
+# rebuild the charts folder based on the Chart.lock file
+# READ the Chart.lock
+helm dependency build

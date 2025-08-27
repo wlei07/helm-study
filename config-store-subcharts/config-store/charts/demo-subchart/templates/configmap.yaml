@@ -4,3 +4,5 @@ metadata:
   name: {{ include "demo-subchart.fullname" . }}
 data:
   test-value: {{ .Values.customValue }}
+  test-value2: {{ .Values.fullnameOverride }}
+  test-global-value: {{ .Values.global.defaultStorageClass }}

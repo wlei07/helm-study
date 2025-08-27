@@ -121,3 +121,13 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+# passing value to the subchart named 'demo-subchart'
+demo-subchart:
+  customValue: 'hello from config-store'
+# passing value to the subchart named 'postgresql'
+postgresql:
+  fullnameOverride: 'my-new-name'
+# 'global' is available to all subcharts
+global:
+  defaultStorageClass: 'my-custom-storage-class'
