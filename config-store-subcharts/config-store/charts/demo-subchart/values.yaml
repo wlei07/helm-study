@@ -1,1 +1,2 @@
 customValue: 'hello from demo-subchart'
+nameOverride: "override from subchart"

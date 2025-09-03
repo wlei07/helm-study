@@ -1,0 +1,3 @@
+# call helper template function from subchart
+# note the .Values.nameOverride is provided different values between parent and subchart
+# test value from subchart: {{ include "demo-subchart.fullname" . }}
