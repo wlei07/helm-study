@@ -128,6 +128,17 @@ demo-subchart:
 # passing value to the subchart named 'postgresql'
 postgresql:
   fullnameOverride: 'my-new-name'
+  auth:
+    username: config_store_user
+    database: config_store_db
+    existingSecret: postgres-creds
+    secretKeys:
+      userPasswordKey: password
+  # enabled: true
 # 'global' is available to all subcharts
 global:
   defaultStorageClass: 'my-custom-storage-class'
+tags:
+  # tags impacts the dependencies enabled or not in Chart.yaml, default false when missing
+  database: true
+  performance: false

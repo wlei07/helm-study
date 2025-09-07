@@ -1,14 +1,9 @@
 kubectl get pod
 kubectl get pod --watch
 kubectl get svc
-kubectl get secrets
-kubectl get secret local-wp-wordpress -o jsonpath='{.data.wordpress-password}' | base64 -d
-kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-password}' | base64 -d
-kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-root-password}' | base64 -d
 kubectl get deploy
 # replica set
 kubectl get rs
-kubectl describe secret local-wp-wordpress
 kubectl describe pod local-wp-wordpress-7b4d8895f-9rs2h
 
 kubectl expose deploy local-wp-wordpress --type=NodePort --name=local-wp-exposed
@@ -23,7 +18,14 @@ kubectl delete svc local-wp-exposed
 
 kubectl logs local-wp-wordpress-7b4d8895f-fbc57
 
+# secrets
 kubectl create secret generic custom-wp-credentials --from-literal wordpress-password=leipassword
+kubectl create secret generic postgres-creds --from-env-file=.env
+kubectl get secrets
+kubectl get secret local-wp-wordpress -o jsonpath='{.data.wordpress-password}' | base64 -d
+kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-password}' | base64 -d
+kubectl get secret local-wp-mariadb -o jsonpath='{.data.mariadb-root-password}' | base64 -d
+kubectl describe secret local-wp-wordpress
 
 kubectl version
 kubectl api-versions

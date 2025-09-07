@@ -5,5 +5,5 @@ dependencies:
 - name: demo-subchart
   repository: ""
   version: 0.1.0
-digest: sha256:b279c07f6203a45f94d56b4628576cbe72553efd491af74221d2d791c4c03581
-generated: "2025-08-26T07:46:15.536682284+02:00"
+digest: sha256:673b6bafa13361d74949cfa70efebe4c4c20b39aa00b6e96c6bf6c47bccb1164
+generated: "2025-09-07T21:00:08.017334569+02:00"

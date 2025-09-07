@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  # when include it from sub chart, . means .Values from subchart
   name: {{ include "demo-subchart.fullname" . }}
 data:
   test-value: "{{ .Values.customValue }}"
