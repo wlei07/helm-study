@@ -16,7 +16,7 @@ image:
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 # This is to override the chart name.
-nameOverride: "override from parent"
+nameOverride: "override-from-parent"
 fullnameOverride: ""
 
 # This section builds out the service account more information can be found here: https://kubernetes.io/docs/concepts/security/service-accounts/
@@ -127,17 +127,23 @@ demo-subchart:
   customValue: 'hello from config-store'
 # passing value to the subchart named 'postgresql'
 postgresql:
-  fullnameOverride: 'my-new-name'
+  fullnameOverride: 'postgresql-db'
   auth:
     username: config_store_user
     database: config_store_db
     existingSecret: postgres-creds
     secretKeys:
       userPasswordKey: password
+    fullnameOverride: postgresql-db
+  primary:
+    persistence:
+      enabled: true
+      storageClass: ""
+      size: 8Gi
   # enabled: true
 # 'global' is available to all subcharts
-global:
-  defaultStorageClass: 'my-custom-storage-class'
+# global:
+#  defaultStorageClass: 'my-custom-storage-class'
 tags:
   # tags impacts the dependencies enabled or not in Chart.yaml, default false when missing
   database: true

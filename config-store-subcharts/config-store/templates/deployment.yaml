@@ -42,18 +42,21 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PORT
-              value: {{ .Values.service.port }}
+              value: {{ .Values.service.port | quote }}
+            {{- with .Values.postgresql.auth }}
             - name: DB_USER
-              value: {{ .Values.postgresql.auth.username }}
+              value: {{ .username | quote }}
             - name: DB_NAME
-              value: {{ .Values.postgresql.auth.database }}
+              value: {{ .database | quote }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.postgresql.auth.existingSecret }}
-                  key: {{ .Values.postgresql.auth.secretKeys.userPasswordKey }}
+                  name: {{ .existingSecret }}
+                  key: {{ .secretKeys.userPasswordKey }}
             - name: DB_URL
-              value: postgresql://$(DB_USER):$(DB_PASSWORD)@$<name of the postgresql service>:5432/$(DB_NAME)
+            {{- end }}
+              # $() syntax is used to refer a previously defined variable.
+              value: postgresql://$(DB_USER):$(DB_PASSWORD)@{{ .Values.postgresql.fullnameOverride }}:5432/$(DB_NAME)
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
