@@ -5,9 +5,11 @@ metadata:
   labels:
     {{- include "helm-hooks.labels" . | nindent 4 }}
   annotations:
-    "helm.sh/hook": pre-upgrade,pre-delete,pre-rollback
+    # note: in case post-upgrade fails, it will not rollback the installed release.
+    # add --atomic flag in order to rollback
+    "helm.sh/hook": post-upgrade # pre-delete,pre-rollback,pre-upgrade
     "helm.sh/hook-weight": "0"
-    "helm.sh/hook-delete-policy": hook-succeeded, before-hook-creation
+    "helm.sh/hook-delete-policy": before-hook-creation # hook-succeeded
 spec:
   backoffLimit: 2 # 10s, 20s, 40s, ...
   template:
@@ -19,4 +21,4 @@ spec:
       containers:
         - name: dummy-backup-db
           image: "alpine:3.20.3"
-          command: ["sh", "-c", "echo 'Backing up some data.'; sleep 10;"]
+          command: ["sh", "-c", "echo 'I will fail.'; exit 1;"]
