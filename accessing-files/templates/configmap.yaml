@@ -3,5 +3,9 @@ kind: ConfigMap
 metadata:
   name: {{ include "accessing-files.fullname" . }}
 data:
-  application.properties: |-
-{{ .Files.Get "files/application.properties" | indent 4 }}
+{{- range $path, $_ := .Files.Glob "files/*.properties" }}
+  {{/* base function removes from files/ part from the path */ -}}
+  {{ base $path }}: |-
+{{/* trim function removes the empty lines of the *.properties files */ -}}
+{{ $.Files.Get $path | trim | indent 4 }}
+{{- end }}
