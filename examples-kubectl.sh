@@ -30,3 +30,5 @@ kubectl describe secret local-wp-wordpress
 kubectl version
 kubectl api-versions
 kubectl config current-context
+
+kubectl get job --watch
