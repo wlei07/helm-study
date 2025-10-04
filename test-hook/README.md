@@ -10,6 +10,7 @@ It is against a installation.
 After changing the test files, we need to release again.
 ```shell
 helm upgrade local-test-hook test-hook
+helm history local-test-hook
 # then run the test again
 helm test local-test-hook --hide-notes
 ```
