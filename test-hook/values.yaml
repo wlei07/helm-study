@@ -159,3 +159,16 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+tests:
+  enabled: true
+  container:
+    nameOverride: 'busybox'
+    # imageRepository: 'alpine'
+    # imageTag: '3.20'
+    imageRepository: 'busybox'
+    imageTag: '1.36.1'
+  scripts:
+    volumeName: 'tests'
+    volumeMountPath: '/tests'
+    runFileName: 'run.sh'
