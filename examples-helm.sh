@@ -59,3 +59,9 @@ helm dependency update
 # rebuild the charts folder based on the Chart.lock file
 # READ the Chart.lock
 helm dependency build
+
+helm plugin --help
+helm plugin install https://github.com/komodorio/helm-dashboard.git
+helm plugin uninstall dashboard
+helm plugin ls
+helm plugin update dashboard
