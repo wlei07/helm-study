@@ -8,6 +8,7 @@ metadata:
   annotations:
     "helm.sh/hook": test
     "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": {{ .Values.tests.hookDeletePolicies | default (list "before-hook-creation") | join "," }}
 data:
 #tpl function take the string and interplate the template
 {{ tpl (.Files.Glob "files/test-scripts/*").AsConfig . | indent 2 }}
