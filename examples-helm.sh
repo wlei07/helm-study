@@ -62,6 +62,17 @@ helm dependency build
 
 helm plugin --help
 helm plugin install https://github.com/komodorio/helm-dashboard.git
+helm dashboard
+helm plugin install https://github.com/databus23/helm-diff
+helm diff --help
+helm diff upgrade nginx bitnami/nginx --set replicaCount=3
+helm diff revision --help
+helm diff revision nginx 1
+helm diff revision nginx 1 3
+helm plugin install https://github.com/helm-unittest/helm-unittest.git
+helm unittest --help
+helm unittest .
+helm unittest . -d
 helm plugin uninstall dashboard
 helm plugin ls
 helm plugin update dashboard
